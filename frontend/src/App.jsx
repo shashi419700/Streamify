@@ -7,6 +7,7 @@ import NotificationsPage from "./pages/NotificationsPage.jsx";
 import CallPage from "./pages/CallPage.jsx";
 import ChatPage from "./pages/ChatPage.jsx";
 import OnboardingPage from "./pages/OnboardingPage.jsx";
+import FriendsPage from "./components/FriendCard.jsx"; 
 
 import { Toaster } from "react-hot-toast";
 
@@ -27,6 +28,8 @@ const App = () => {
   return (
     <div className="h-screen" data-theme={theme}>
       <Routes>
+        
+        {/* HOME */}
         <Route
           path="/"
           element={
@@ -39,6 +42,8 @@ const App = () => {
             )
           }
         />
+
+        {/* SIGNUP */}
         <Route
           path="/signup"
           element={
@@ -49,6 +54,8 @@ const App = () => {
             )
           }
         />
+
+        {/* LOGIN */}
         <Route
           path="/login"
           element={
@@ -59,6 +66,8 @@ const App = () => {
             )
           }
         />
+
+        {/* NOTIFICATIONS */}
         <Route
           path="/notifications"
           element={
@@ -71,6 +80,8 @@ const App = () => {
             )
           }
         />
+
+        {/* CALL PAGE */}
         <Route
           path="/call/:id"
           element={
@@ -82,6 +93,7 @@ const App = () => {
           }
         />
 
+        {/* CHAT PAGE */}
         <Route
           path="/chat/:id"
           element={
@@ -95,6 +107,21 @@ const App = () => {
           }
         />
 
+        {/* FRIENDS PAGE — FIX */}
+        <Route
+          path="/friends"
+          element={
+            isAuthenticated && isOnboarded ? (
+              <Layout showSidebar={true}>
+                <FriendsPage />
+              </Layout>
+            ) : (
+              <Navigate to={!isAuthenticated ? "/login" : "/onboarding"} />
+            )
+          }
+        />
+
+        {/* ONBOARDING */}
         <Route
           path="/onboarding"
           element={
@@ -109,10 +136,12 @@ const App = () => {
             )
           }
         />
+
       </Routes>
 
       <Toaster />
     </div>
   );
 };
+
 export default App;
